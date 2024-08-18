@@ -7,25 +7,22 @@ export default function Header() {
 
   useEffect(() => {
     fetch("https://blog-application-backend-9vrl.onrender.com/profile", {
-      credentials: "include",
+      credentials: "include", // Important if using cookies for authentication
     })
       .then((response) => {
-        if (response.status === 401) {
-          throw new Error("Unauthorized access - please log in.");
-        }
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((userInfo) => {
+        console.log(userInfo); // Log the user info for debugging
         setUserInfo(userInfo);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, [setUserInfo]);
-  
 
   function logout() {
     fetch("https://blog-application-backend-9vrl.onrender.com/logout", {
