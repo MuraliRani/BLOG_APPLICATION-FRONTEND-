@@ -7,7 +7,7 @@ export default function Header() {
 
   useEffect(() => {
     fetch("https://blog-application-backend-9vrl.onrender.com/profile", {
-      credentials: "include", // Important if using cookies for authentication
+      credentials: "include",
     })
       .then((response) => {
         if (!response.ok) {
@@ -16,7 +16,6 @@ export default function Header() {
         return response.json();
       })
       .then((userInfo) => {
-        console.log(userInfo); // Log the user info for debugging
         setUserInfo(userInfo);
       })
       .catch((error) => {
