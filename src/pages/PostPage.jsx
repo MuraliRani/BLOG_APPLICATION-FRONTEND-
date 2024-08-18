@@ -1,7 +1,7 @@
 import { formatISO9075 } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { UserContext } from "../UserContex";
+import { UserContext } from "../context/UserContext"; // Update the path accordingly
 
 const PostPage = () => {
   const [postInfo, setPostInfo] = useState();
@@ -9,12 +9,10 @@ const PostPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://blog-application-backend-9vrl.onrender.com/post/${id}`).then((response) => {
-      response.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
-  }, []);
+    fetch(`https://blog-application-backend-9vrl.onrender.com/post/${id}`)
+      .then((response) => response.json())
+      .then((postInfo) => setPostInfo(postInfo));
+  }, [id]);
 
   if (!postInfo) return "";
 
@@ -45,7 +43,7 @@ const PostPage = () => {
         </div>
       )}
       <div className="image">
-        <img src={`https://blog-application-backend-9vrl.onrender.com/${postInfo.cover}`} alt="blog-image" />
+        <img src={`https://blog-application-backend-9vrl.onrender.com/${postInfo.cover}`} alt={postInfo.title} />
       </div>
       <div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
     </div>

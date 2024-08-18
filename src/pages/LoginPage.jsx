@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../UserContex";
+import { UserContext } from "../context/UserContext";
 
 const LoginPage = () => {
   const [username, setUserame] = useState("");
