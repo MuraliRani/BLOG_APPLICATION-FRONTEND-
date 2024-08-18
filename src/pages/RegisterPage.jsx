@@ -6,18 +6,25 @@ const RegisterPage = () => {
 
   async function register(e) {
     e.preventDefault();
-    const response = await fetch("https://blog-application-backend-9vrl.onrender.com/register", { // Updated URL
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-    
-    if (response.status === 200) {
-      alert("Registration successful");
-    } else {
-      alert("Registration failed.");
+    try {
+      const response = await fetch("https://blog-application-backend-9vrl.onrender.com/register", {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+  
+      if (response.ok) {
+        alert("Registration successful");
+      } else {
+        const errorText = await response.text();
+        alert(`Registration failed: ${errorText}`);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
     }
   }
+  
 
   return (
     <form className="register" onSubmit={register}>
