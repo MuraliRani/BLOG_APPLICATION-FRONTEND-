@@ -17,14 +17,8 @@ const LoginPage = () => {
       credentials: "include",
     });
 
-    if (response.ok) {
-      response.json().then((userInfo) => {
-        setUserInfo(userInfo);
+    setUserInfo(response.data);
         setRedirect(true);
-      });
-    } else {
-      alert("Wrong credentials");
-    }
   }
 
   if (redirect) {
